@@ -29,7 +29,7 @@ switch ($method) {
         break;
 
         default:
-    
+        header('Content-Type: application/json', true, 405);
         echo json_encode(["message" => "Method not allowed"]);
         break;
 

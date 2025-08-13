@@ -60,11 +60,11 @@ public function getdragons()
 
         if (isset($infor->nome) && isset($infor->significado) && isset($infor->cor) && isset($infor->especie) && isset($infor->cavaleiro)) {
             $dragon = new Dragons();
-            $dragon->nome = $infor->nome;
-            $dragon->significado = $infor->significado;
-            $dragon->cor = $infor->cor;
-            $dragon->especie = $infor->especie;
-            $dragon->cavaleiro = $infor->cavaleiro;
+            $dragon->nome = htmlspecialchars(trim($infor->nome));
+            $dragon->significado = htmlspecialchars(trim($infor->significado));
+            $dragon->cor = htmlspecialchars(trim($infor->cor));
+            $dragon->especie = htmlspecialchars(trim(string: $infor->especie));
+            $dragon->cavaleiro = htmlspecialchars(trim($infor->cavaleiro));
 
             if ($dragon->createdragons()) {
                 header('content-Type: application/json', true, 201);
