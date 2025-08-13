@@ -5,19 +5,33 @@ use Model\Dragons;
 
 class DragonsController
 {
-    public function getdragons()
-    {
-        $dragon = new Dragons();
-        $dragons = $dragon->getdragons();
 
+public function getdragons()
+{
+    $id = $_GET['id'] ?? null;
+    $dragon = new Dragons();
+
+    if ($id) {
+        $result = $dragon->getdragonById($id);
+        if ($result) {
+            header('Content-Type: application/json', true, 200);
+            echo json_encode($result);
+        } else {
+            header('Content-Type: application/json', true, 404);
+            echo json_encode(["message" => "Dragon not found"]);
+        }
+    } else {
+        $dragons = $dragon->getdragons();
         if ($dragons) {
             header('Content-Type: application/json', true, 200);
-            echo json_encode($dragons);
+            echo json_encode(value: $dragons);
         } else {
             header('Content-Type: application/json', true, 404);
             echo json_encode(["message" => "No dragons found"]);
         }
     }
+}
+
 
     public function createdragons()
     {

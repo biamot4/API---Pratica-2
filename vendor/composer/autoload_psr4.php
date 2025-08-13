@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Beatriz\\Fourthwing\\' => array($baseDir . '/src'),
+    'Model\\' => array($baseDir . '/Model'),
+    'Controller\\' => array($baseDir . '/Controller'),
+    'Beatriz\\Fourthwing\\' => array($baseDir . '/fourthwing_api'),
 );

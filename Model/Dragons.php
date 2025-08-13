@@ -50,8 +50,18 @@ class Dragons
         $bd = "SELECT * FROM dragons";
         $actionget = $this->conexao->prepare($bd);
         $actionget->execute();
-        return $actionget->fetch(PDO::FETCH_ASSOC);
+        return $actionget->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+public function getdragonById($id)
+{
+    $bd = "SELECT * FROM dragons WHERE id = :id";
+    $actionget = $this->conexao->prepare($bd);
+    $actionget->bindParam(":id", $id, PDO::PARAM_INT);
+    $actionget->execute();
+    return $actionget->fetch(PDO::FETCH_ASSOC);
+}
 
     public function updatedragons()
     {
@@ -72,7 +82,7 @@ class Dragons
         return false;
     }
 
-    public function delete()
+    public function deletedragons()
     {
         $bd = "DELETE FROM dragons WHERE id = :id";
         $actiondelete = $this->conexao->prepare($bd);
