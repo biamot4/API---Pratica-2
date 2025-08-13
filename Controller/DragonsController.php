@@ -9,6 +9,8 @@ class DragonsController
 public function getdragons()
 {
     $id = $_GET['id'] ?? null;
+    $especie = $_GET['especie']??null;
+    $cor = $_GET ['cor'] ?? null;
     $dragon = new Dragons();
 
     if ($id) {
@@ -20,6 +22,25 @@ public function getdragons()
             header('Content-Type: application/json', true, 404);
             echo json_encode(["message" => "Dragon not found"]);
         }
+    } else if($especie){
+          $result = $dragon->getdragonByespecie($especie);
+           if ($result) {
+            header('Content-Type: application/json', true, 200);
+            echo json_encode($result);
+        } else {
+            header('Content-Type: application/json', true, 404);
+            echo json_encode(["message" => "Dragon not found"]);
+        }
+    } else if ($cor){
+        $result = $dragon->getdragonBycor($cor);
+            if ($result) {
+                header('Content-Type: application/json', true, 200);
+                echo json_encode($result);
+            } else {
+                header('Content-Type: application/json', true, 404);
+                echo json_encode(["message" => "Dragon not found"]);
+            }
+
     } else {
         $dragons = $dragon->getdragons();
         if ($dragons) {

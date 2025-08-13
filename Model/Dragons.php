@@ -63,6 +63,24 @@ public function getdragonById($id)
     return $actionget->fetch(PDO::FETCH_ASSOC);
 }
 
+public function getdragonByespecie($especie)
+{
+    $bd = "SELECT * FROM dragons WHERE especie = :especie";
+    $actionget = $this->conexao->prepare($bd);
+    $actionget->bindParam(":especie", $especie, PDO::PARAM_STR);
+    $actionget->execute();
+    return $actionget->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getdragonBycor($cor)
+{
+    $bd = "SELECT * FROM dragons WHERE cor = :cor";
+    $actionget = $this->conexao->prepare($bd);
+    $actionget->bindParam(":cor", $cor, PDO::PARAM_STR);
+    $actionget->execute();
+    return $actionget->fetchAll(PDO::FETCH_ASSOC);
+}
+
     public function updatedragons()
     {
         $bd = "UPDATE dragons SET nome = :nome, significado = :significado, cor = :cor, especie = :especie, cavaleiro = :cavaleiro WHERE id = :id";
